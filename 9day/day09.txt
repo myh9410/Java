@@ -1,0 +1,105 @@
+*day 09*  클래스 / 인스턴스 / 객체
+
+5. 상속
+
+	B의 내용(변수와 메서드)를 A가 사용할 수 있다.
+
+	(그와 동시에 A는 B의 내용에 추가해서 새로운 기능을 덧붙일 수 있는 거다
+	 그래서 B를 확장(extends)하게 된다)
+
+	class B{
+		변수1, 변수2, 메서드1 메서드2
+	}
+
+	class A extends B{
+		4개의 멤버가 이미 들어와 있다!!(변수1,2 메서드1,2)
+
+		메서드3(){}
+		메서드4(){}
+	}
+
+	class Phone{
+		void call(){}
+	}
+	class Phone2G extends Phone{
+		//void call(){}
+
+		void sendMsg(){}	//확장했다.
+	}
+	class Phone3G extends Phone2G{
+		//void call(){}
+		//void sendMsg(){}	
+	
+		void dataConnect(){}	//확장했다.
+	}
+	class Phone4G extends Phone 3G{
+		//void call(){}
+		//void sendMsg(){}	
+		//void dataConnect(){}	
+	
+		void intConnect(){}	//확장했다.
+	}
+
+
+*포함*
+			상속 vs 포함
+	클래스끼리 관계를 맺어 줘야 기능을 확장해가며 사용할 수 있다.
+	관계맺기 : 1. 상속	is a 관계가 성립할 때 상속시키자
+		   2. 포함	has a 관계가 성립할 때 포함이다.
+		   3. ???
+
+
+		class A extends B{}	//상속
+
+
+		class A{
+			B obj;		//포함!
+		}
+
+	카테고리(그룹).
+
+	class 얼굴 has a	눈, 코, 입 ....		--> 포함
+
+
+	class 삼각형 is  a shape(도형)			--> 상속
+	class 삼각형 has a 점3개		점 has a point x, point y <--포함.
+
+*재정의*  :  다시 만들자!    대신 부모 메서드의 이름은 그대로 두고... 내용만 바꿔서!!!
+	- 상속을 받는다.
+	- 부모로부터 메서드를 받는데....
+	물려받은 메서드의 내용이 맘에 들지 않을 때....
+	메서드의 머릿부 (제목)은 그대로 두고....
+	{} 안의 내용을 변경할 수 있다.
+
+
+*다형성*
+	- 다 : 다양한
+	
+	- 형 : 자료형
+
+	- 다형 : 다양한 타입에 관한 문법
+
+	- 다형성 : 다양한 타입을 "대입"할 수 있는 객체지향언어의 성질
+			단, 상속 관계에서만이 가능하다..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

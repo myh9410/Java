@@ -1,0 +1,244 @@
+*day01
+
+*오리엔테이션
+  1. 배정수 강사, doginatas@hanmail.net
+	제목 :  오후 자바  000
+	본문 : 소스 그대로...
+
+  2. 학원 자습실 : 4층 (조교 선생님)
+
+  3. 고정석
+
+  4. 2/9~3/2(목),  3.1(수) 쉬는 날!
+	4시간 수업 * 15일간 = 60시간 (80시간)
+
+  5. 강사 pc 접속
+	시작 - 검색창 - \\192.168.0.5 입력
+		java~~ 1300 폴더
+-----------------------------------------------------------
+*자바 환경설정
+	1. jdk 설치
+		java development kit(자바 개발 도구)
+		특정 폴더
+		-	program files 폴더
+			-	java 폴더
+				-	jdk 폴더
+				-	jre 폴더
+		
+		1)다운로드
+			www.oracle.com에서 downloads탭에 마우스를 올림(hover호버링) //oracle - 데이터베이스 만드는 회사
+				jdk8u121 - 8버전121번째 update 본인 윈도우맞는 버전 다운
+		
+		2)인스톨(exe 파일 실행)
+
+			(설치 경로 설정('환경변수')) - X
+
+	2.편집 툴(이클립스)을 설치
+		
+		1) 다운로드
+			eclipse.org
+		
+		2)eclipse.zip(압축파일)
+			IDE   (통합개발 환경) - mac - xcode,C - visual studio,java - eclipse
+			eclipse.org - IDE&Tools - JAVA EE = 웹개발환경(jsp할때 사용) - Neon Packages - 본인 윈도우 버전
+
+*프로그램 설치
+다운로드한 알집파일 압축 해제 - eclipse.exe 실행
+*****Java EE -> Java로  우측 상단에 Open Perspective - Java(jsp하려면 Java EE)
+
+	font 설정
+		"나눔고딕코딩"  "굵게"  크기
+	
+	이클립스메뉴 window - preferences - "font"
+	-> Colors and Fonts - Basic - Text Font 클릭 후 우측에 Edit - 글꼴, 글꼴 스타일, 크기
+								  나눔고딕코딩   굵게	  18
+
+#나눔고딕코딩 없을시
+네이버에서 나눔고딕코딩 검색
+
+
+
+*프로젝트 만들기
+	프로젝트 : 큰 폴더
+	 - 패키지 : 작은 폴더
+	    - 파일.java
+	    - 파일.java
+	    - 파일.java		-=>"클래스로 만드는
+	    - 파일.java			자바 소스파일"
+	    - 파일.java
+	    - 파일.java
+	 - 패키지 : 작은 폴더
+	    - 파일.java
+	    - 파일.java
+	    - 파일.java
+
+	1.package explorer(화면 왼쪽) - 패키지 영역 - 관리
+	  가운데		      - 소스 영역
+	  하단			      - 콘솔 영역 - 결과,에러 등
+		
+		package explorer에서 마우스 오른쪽 버튼
+		
+		new - java project - 프로젝트 이름 입력(날짜로)
+	
+	2. 패키지 & 자바 소스파일 만들기
+
+		프로젝트 - src - 마우스 오른쪽 버튼
+
+		new - class
+
+	3. 클래스 만들기
+		class 대화상자에서
+		package : basicformatex
+
+		name	: BasicFormatTest
+
+		(엔터)
+
+
+	4.프로젝트 삭제 : 프로젝트 위에 마우스 두고 오른쪽마우스 - delete - 완전히 삭제(폴더까지)or Java내에서만 삭제 선택(폴더는 남아있음)
+	
+	5.프로젝트 불러오기 : 
+		Import - General - Existing Projects into Workspace - Browse에서 프로젝트 있는 폴더 찾기
+	
+	6.클래스 영역 - "{" 와 "}" 사이
+		처리를 하는 부속품을 "메서드"라고 한다.
+		매서드는 항상 "클래스 영역 - 클래스 body, {}"
+			 클래스 영역 안에 만들어져야 한다.
+
+		클래스 안에는 "변수"+"메서드"라는 부속품이 들어가게 된다.
+		
+		클래스를 사용한다 라는 뜻은 변수와 메서드를 만들어 놓고 사용하겠다는 뜻이다.
+
+	7.주석(comment) - cpu, ram이 처리하지 않는 문구!
+			  "사람이 보기 편하라고 만드는 설명글"
+			 주석의 종류 : //    /*   */    --> 블럭주석
+				       /**        */    --> 설명글 달 때 사용하는 html용 주석
+
+	8. 키워드!(자주색 단어)
+		~~~~을 해라(명령), ~~~~한 상태입니다(설명)
+
+		 class : 여기가 클래스에요.
+	        public : 공개되어 있습니다.
+		public class : 공개되어 있는 클래스입니다.
+
+
+		main 메서드 : 이 프로젝트의 시작점!
+				or 이 클래스 파일의 여러 메서드 중에서 제일 먼저 수행하는 "시작점!"
+		
+		package basicformatex;
+
+		public class BasicFormatTest2 {
+								  //String, System, BasicFormat Test2 : 대문자로 시작 = 클래스
+			public static void main(String[] args){   //static - 미리 만들어 놓는
+								  //void   - 리턴타입 (~이 없는)
+				System.out.println("문용호");	  //출력print - System.out.println("문용호");	-> 콘솔(모니터)에 출력
+			}					  //main   - 시작점
+								  //영어단어() <-- 메서드(=함수)
+								  //키워드()   <== 예외
+		}						  //lsk()    메서드는 독립적이다. 메서드 안에 메서드 못 만듬.
+	
+	9. 자동 완성기능 - ctrl + spacebar
+	11. 실행 기능 - Ctrl + F11
+	12. Library - 클래스(메서드 + 변수) 저장
+BasicFormatTest2 - 카멜표기법(대문자로 표시해주면서 읽기 쉽게 표기)
+	.(period,dot) - '~의'(소유격, 메서드를 부를 때 사용하면 된다)(메서드 호출 연산자)
+								     (변수 호출 연산자)
+main, println -> 소괄호 안에 뭔가 있다.
+	 	 목적어 : arguments
+						
+void useMyPen(){   // 메서드를 만드는 것(define)
+
+}
+
+
+
+*출력문 - 콘솔에 출력하기
+
+		1. println() - 한줄 출력하고 줄바꿈해라		- 단축키 syso에서 Ctrl+ Spacebar
+System.out	2. print()   - 줄바꿈없이 출력해라
+
+		escape sequence(제어문자) : 줄바꿈, 일정 간격 벌림 등
+			= '\' 와 '알파벳'의 조합
+			\n : \new line  -  줄바꿈
+			\t : \tab       -  tab키
+			\r : \carriage  -  carriage를 return 
+		     \r+\n : 		-  Enter키 역할
+
+
+
+		3. printf(A,B)
+			A : 서식문자
+				"%알파벳"꼴(ex - %d : decimal(십진수)
+						 %c : character
+						 %f : double/float
+						 %s : String		)
+			B : 인자(argument)
+				문자열 : ""
+				문자   : ''
+				정수   : 소수부가 없는 수
+				실수   : 소수부가 있는 수
+
+
+
+
+
+
+
+
+		(데이터 타입) : cpu가 처리할 수 있는 자료
+public static void main(String[] args) {
+	System.out.println("10"); // argument -> ""   문자열(string)
+	System.out.println(10);   //	      -> 10   정수형(integer)
+	System.out.println(1.1);  // 	      -> 1.1  실수형(double)
+	System.out.println(1.1F); //	      -> 1.1F 실수형(float)
+	System.out.println('강'); // 	      -> '강' 문자형(character)
+
+
+Ctrl+alt+아래화살표 : 윗문장 바로 아랫줄에 복사
+alt + 위 or 아래 화살표 : 문장 이동
+Ctrl+Home or End : 커서위치부터 Home or End까지 블럭
+
+
+
+*자료형 / 변수
+
+	자료형(data type, type, @@형) (정수형, 문자형, 문자열, 실수형, 논리형)
+
+		- 명령 : 데이터를 저장하기 위한 "메모리 영역을 요청"하는 명령이다.
+
+			데이터를 사용하려면 잠시 저장할 수 있는 공간이 필요하다
+			그 공간을 ram에 만들게 되는데
+			자료형을 통해서 해당 메모리 영역을 확보할 수 있게 된다.
+			
+			이 자료형들이 모여서 프로그램의 키기(byte)가 결정된다.
+
+		- 키워드
+			정수(실수, 문자, 문자열 등) 공간을 확보해라
+		
+			       키워드		ram byte수를 확보       byte에 따라 다룰 수 있는
+									데이터 종류가 달라진다.
+
+
+				byte			1byte		-128	    ~	     127
+				short			2byte		-32768	    ~      32767
+		정수형 자료형 : int			4byte		-2147483648 ~ 2147483647
+				long			8byte			 ± 900경
+		문자형	      : char			8byte		     0      ~    65535
+기본형		실수형	      : double			8byte			소수점 308자리
+				float			4byte			소수점 38자리
+		논리형	      : boolean			1byte			2개만 표현!
+------------------------------------------------------
+
+참조형		문자열	      : String			-byte(4)		제한이 없다
+
+------------------------------------------------------
+
+*기본구문
+
+
+
+
+
+
+
+

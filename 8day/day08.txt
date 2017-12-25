@@ -1,0 +1,107 @@
+*day08*	클래스 / 인스턴스 / 객체
+
+	hak1 <-	반	이름	성적	총점	평균 등의 정보
+
+		미리 설계
+			class ReportCard{
+				int bun;
+				String name;
+				int kor, eng, math;
+				
+				//편의 메서드 = 비지니스 메서드(편의를 위해)
+				void setScore(int b, String na, int k, int e, int m){
+							//()안의 변수를 매개변수(파라미터) 라고 한다
+							class와 hak.setScore를 연결해주는 교두보역할
+					bun = b;
+					name = na;
+					kor = k; eng = e; math = m;
+
+	
+				}
+			}
+
+		30명이면....
+			ReportCard hak1 = new ReportCard();
+			hak1.bun = 1;			
+			hak1.name = "홍길동";
+			hak1.kor = 10;
+			hak1.eng = 20;
+			hak1.math = 30;
+
+			ReportCard hak2 = new ReportCard();
+			hak.setScore(2, "이순신", 11, 22, 33);	//소스절약		
+					argument들을 파라미터(매개변수)한테 넣어주면,
+						인스턴스 변수한테 전달해 준다!
+											
+
+			......
+			ReportCard hak3 = new ReportCard();
+			ReportCard hak4 = new ReportCard();
+
+
+
+
+
+
+
+1. 접근지정자(acces modifier)
+	: 메서드나 변수에 접근할 수 있는 수준을 지정해 놓자
+
+	1) public : 외부에서 언제든 접근 가능한... 공개되어 있다.
+	   public int num;
+	   public void method(){}
+
+	2) protected : 같은 패키지(폴더)의 클래스들끼리 언제든 사용할 수 있다.
+		       상속 받은 관계에서도 사용할 수 있다.
+
+	3) 아무것도 안 붙어 있을 때 : default 상태
+				같은 폴더에 있을 때 사용가능(protected보다 범위가 좁아짐)
+
+	4) private : 클래스 안에서만 사용할 수 있는 상태
+			- 보통 변수 선언시, private을 써서 외부로부터 숨겨 놓는다.
+	
+
+
+2. 데어터 입력 / 출력하기
+    setter     /  getter
+
+3. 객체에 처음부터 값 넣어두기
+	생성자
+
+4. static
+	class Some{
+
+		int bun;
+		void showBun(){}
+
+		해당 변수나 메서드를 new 키워드 없이 미리 인스턴스화 시키자!
+		static int num=10;	미리 만들어 놓는 변수, 메서드...
+		static void m(){	해당 정보를 언제든 사용할 수 있다.
+		}
+	}
+=======================================================================================================
+5. 상속 : inheritance	재산을 물려받는 것
+			클래스의 재산(변수, 메서드)을 물려주겠다.
+
+	class A{
+
+	}
+							A가 물려주면 B가 확장한다.
+	class B extends A{	B는 A를 확장한다.	B가 자식(물려받음), A가 부모(물려줌)... 클래스
+						멤버수		B	 >=	    A
+	}
+	---------------------------------
+	클래스와 클래스의 관계 맺기(내일)
+
+
+
+6. 재정의
+
+7. 다형성
+
+8. 추상 클래스
+
+9. 인터페이스
+
+==============================================
+ 자바2 시작!

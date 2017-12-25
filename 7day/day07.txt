@@ -1,0 +1,145 @@
+*day 07* 클래스 / 인스턴스 / 객체
+
+	- 클래스 {
+
+		//변수를 만들었다.	<-- 인스턴스(를 만들었을 때 사용할 수 있는) 변수
+		int num;		<-- "인스턴스 변수"
+		double a;
+		String name;		
+
+
+
+
+		//메서드를 정의했다! 정의 - define	"만들었다"
+		
+
+
+		void usePen(){}			//void 이름(){}
+						//메서드 이름 지을 때 동사를 넣어주는게 좋음.
+
+		static void display(){}
+
+		void printAge(){
+			if (조건)
+				return ;		//아무것도 return하지 않으므로 void
+			else
+				return ;
+
+		}
+
+
+		int getNum(){		//메서드가 종료되면서 반환시키는(return) 값을 넣는 int
+					// 0(정수)을 return 시키므로 int
+
+			return 0;			//return : 메서드를 탈출하는데에 사용.
+		}
+		
+		double getDivide(){
+			return 5/(double)2.0;		//실수 return
+		}
+
+		String getName(){
+			return JOptionPane.showInputDialog("이름 입력");	//문자열 return
+		}
+
+		static public void main(String [] args){}
+	}
+
+
+	-메서드
+		클래스를 사용하다 보면, 비슷한 패턴으로 같은 작업이 반복되는 경우가 많다.
+		그걸 메서드로 만들어 놓고(똑같은걸 계속 쓰면 귀찮으니까..) 간접적으로 처리시키자!
+			*정의 : define*		*호출 : call*
+
+		class{
+
+
+		인스턴스변수는 각각의 정보를 갖고 있다. -> 어떠헤 처리해 줄까?(메서드)
+				(인스턴스 변수)
+
+		}
+
+
+		class Marine{
+			int attack;
+			int hp;
+			void 이동(int x, int y){
+				//point(x,y)지점으로 이동한다.
+			}
+		}
+
+		Marine m1 = new Marine();
+		Marine m2 = new Marine();
+		Marine m3 = new Marine();
+		Marine m4 = new Marine();
+
+		m1.attack = 30
+		m1.hp = 100;
+
+		m1.이동(50,40);
+		m2.이동(50,40);
+		m3.이동(50,40);
+		m4.이동(50,40);
+
+	- 메서드
+
+		class Some{
+			정의부 : 만들기
+			리턴타입 이름(){
+
+			}
+			#1. 기본 유형
+			void 이름(){ //메서드의 용도를 잘 파악할 수 있는 이름!
+				    //동사형태로 지어주자!
+			
+			}	//1. 흔적 지우기	2. 복귀하기(return하기)
+			
+			#2. 값 전달하기 : call by value
+				           호출부 -> 정의부로 보낸다.
+			void add(int a, int b){	//매개변수 = parameter
+
+			}
+
+		}
+		
+
+		호출부 : 사용하기
+		new Some().메서드();			new Some() ->인스턴스
+
+		Some some = new Some();
+		
+		some.메서드();
+
+		some.메서드();
+
+		some.add();		<-에러. parameter에 전달할 값이 없다. 규격에 맞춰야한다..
+		some.add(5.9 , 20);	<-에러. int라는 타입에 조건을 맞춰야한다.
+		some.add(5,10);		<-정상. argumnet를 보내면
+						파라미터가 대입 받아야 한다.
+						항상 둘 간에는 보이지 않는 "대입식"이 성립되어야
+						정상적인 임무를 수행할 수 있다.
+		argumet 5 와 argument 10    은 각각
+	      parameter int a 와 parameter int b에 대입되어 사용하게 된다.
+
+			#3. 값 전달하기 : 메서드 -> 호출부로 "다시 돌려보낸다."(return)
+			void sub(){ return ; //그냥 여기서 종료해라! }
+			int sub(){
+				return 10-3;	//return value가 존재. return값이 정수니까 int
+				return 10-3+""	//return값이 String이니까 String sub()
+				return 10-3/2.0	//return값이 Double이니까 Double sub()
+			}
+
+			#4. 종합
+			int mul(int a, int b){
+				return a*b;
+
+			}
+
+
+
+
+
+
+
+
+
