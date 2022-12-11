@@ -61,3 +61,31 @@ catch (IOException ex){
     return ex.getMessage();
 }
 ```
+
+### 4. 클래스와 멤버의 접근 권한을 최소화하라
+1. 모든 클래스와 멤버의 접근성을 가능한 한 좁힌다
+   - public 클래스의 인스턴스 필드는 되도록 public이 아니어야 한다.
+     - public 가변 필드를 갖는 클래스는 일반적으로 thread safe하지 않다.
+     - private 인스턴스를 만들고, 이에 접근할 수 있는 Getter, Setter를 만든다. (다만, Getter가 있다고 무조건 Setter를 만드는 것은 지양한다.)
+2. 변경 가능성을 최소화하라
+     - 모든 필드를 private final로 지정한다.
+     - 자기 클래스 외에는 가변 컴포넌트에 접근할 수 없도록 한다.
+     - 불변 객체는 thread safe하여 안심하고 공유할 수 있다.  
+
+불변인 클래스를 보장하는 방법
+- 자신을 상속하지 못하도록, 생성자를 private이나 package-private하게 만들고, public 정적 생성자를 제공한다.
+```java
+public class Size {
+    private final double width;
+    private final double length;
+    
+    private Size(double width, double length) {
+        this.width = width;
+        this.length = length;
+    }
+    
+    public static Size valueOf(double width, double length) {
+        return new Size(width, length);
+    }
+}
+```
