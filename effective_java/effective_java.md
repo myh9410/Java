@@ -89,3 +89,22 @@ public class Size {
     }
 }
 ```
+
+### 5. Generic
+1. Raw Type은 사용하지 않는다
+    - 컴파일 과정에서 에러를 발견하기 어렵다.
+    ```java
+        private final Collection stamps = ...; //안좋은 코드
+        stamps.add(new Coin(...)); //"unchecked call" 경고만 나옴
+    
+        private final Collection<Stamp> stamps = ...; // 다음과 같이 명시하자.
+    ```
+    - ```List```와 ```List<Object>```의 차이
+        - ```List```는 Raw Type
+        - ```List<Object>```는 모든 타입을 허용한다는 것을 명시
+    - ```instanceof``` 연산자에 한하여 Raw Type 사용은 괜찮다.
+    ```java
+        if (o instanceof Set) {
+            Set<?> s = (Set<?>) o;
+        }
+    ```
