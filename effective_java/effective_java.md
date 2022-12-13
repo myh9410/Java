@@ -92,7 +92,7 @@ public class Size {
 
 ### 5. Generic
 1. Raw Type은 사용하지 않는다
-    - 컴파일 과정에서 에러를 발견하기 어렵다.
+    - 컴파일 과정에서 에러를 발견하기 어렵다
     ```java
         private final Collection stamps = ...; //안좋은 코드
         stamps.add(new Coin(...)); //"unchecked call" 경고만 나옴
@@ -102,9 +102,23 @@ public class Size {
     - ```List```와 ```List<Object>```의 차이
         - ```List```는 Raw Type
         - ```List<Object>```는 모든 타입을 허용한다는 것을 명시
-    - ```instanceof``` 연산자에 한하여 Raw Type 사용은 괜찮다.
+    - ```instanceof``` 연산자에 한하여 Raw Type 사용은 괜찮다
     ```java
         if (o instanceof Set) {
             Set<?> s = (Set<?>) o;
         }
     ```
+    - ```@SuppressWarnings("unchecked")``` 어노테이션으로 경고를 숨길때는 항상 이유를 주석으로 달자
+2. 배열과 리스트
+    - 런타임 시 에러가 발생
+      ```java
+      Object[] objectArray = new Long[];
+      objectArray[0]; // ArrayStoreException 발생
+      ```
+    - 컴파일 시 에러가 발생
+      ```java
+      List<Object> ol = new ArrayList<Long>();
+      ol.add("문자열"); // 컴파일 에러 발생
+      ```
+
+### 6. 열거 타입(Enum)과 어노테이션(@)
