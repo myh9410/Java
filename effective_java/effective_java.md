@@ -122,3 +122,43 @@ public class Size {
       ```
 
 ### 6. 열거 타입(Enum)과 어노테이션(@)
+1. int 상수 대신 열거 타입을 사용하라
+    - JAVA의 열거타입은 클래스, 상수 하나당 인스턴스를 만들어 public static final 필드로 공개한다
+    - 외부에서 접근가능한 생성자가 없으므로 외부에서의 생성, 삭제에 대한 우려가 없다
+    - 열거 타입 내에서 메서드를 가질 수 있다
+    - ```java
+         public enum Planet {
+            MERCURY(3.302e+23, 2.439e6),
+            VENUS(4.869e+24, 6.052e6),
+            ...
+      
+            private final double mass;
+            private final double surfaceGravity;
+      
+            public double surfaceWeight(double mass) {
+               return mass * surfaceGravity;
+            }
+         }
+      ```
+2. ordinal 메서드 대신 인스턴스 필드를 사용하라
+    - ordinal의 경우, 상수 선언 순서를 바꾸는 순간 오류가 발생할 수 있다
+    - 중간 값을 비워둘 수 없다
+    - ```java
+         public enum Ensemble {
+            SOLO(1), DUET(2), OCTET(8), ...
+      
+            private final int numberOfMusicians;
+            public int numberOfMusicians() { return numberOfMusicians; }
+            Ensemble(int size) { this.numberOfMusicians = size; }
+         }
+      ```
+3. 열거한 값들이 집합으로 사용되는 경우, EnumSet을 사용하라
+```java
+public class Text {
+    public enum Style {BOLD, ITALIC, UNDERLINE, STRIKETHROUGH}
+   
+   public void applyStyles(Set<Style> styles) { ... }
+}
+
+text.applyStyles(EnumSet.of(Style.BOLD, Style.ITALIC));
+```
