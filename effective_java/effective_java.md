@@ -162,3 +162,27 @@ public class Text {
 
 text.applyStyles(EnumSet.of(Style.BOLD, Style.ITALIC));
 ```
+4. 인터페이스를 사용하여 열거타입을 확장할 수 있다
+
+```java
+public interface Operation {
+    double apply(double x, double y);
+}
+
+public enum BasicOperation implements Operation {
+    PLUS("+") {
+        @Override
+        public double apply(double x, double y) {
+            return x + y;
+        }
+    },
+    MINUS("-") {
+        @Override
+        public double apply(double x, double y) {
+            return x-y;
+        }
+    }
+    ...
+}
+```
+### 7. 람다와 스트림
