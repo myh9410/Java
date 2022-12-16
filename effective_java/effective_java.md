@@ -186,3 +186,32 @@ public enum BasicOperation implements Operation {
 }
 ```
 ### 7. 람다와 스트림
+1. 익명 클래스보다는 람다를 사용해라
+```java
+   //익명 클래스의 인스턴스를 함수 객체로 사용 - 낡은 방식
+   Collections.sort(words, new Comparator<String>() {
+      public int compare(String s1, String s2) {
+          return Integer.compare(s1.length(), s2.length());      
+      }           
+   })
+      
+   //익명클래스를 람다 방식으로 대체
+   Collections.sort(words, (s1, s2) -> Integer.compare(s1.length(), s2.length()));
+      
+   //비교자 생성 메서드로 대체
+    Collections.sort(words, comparingInt(String::length));
+```
+주의) 
+- 메서드나 클래스와 달리, 람다는 이름이 없고, 문서화할 수 없다.
+- 코드 자체로 명확하지 않거나, 코드가 오히려 길어지면 람다를 사용하지 않는다.
+- 람다를 직렬화하지 않는다.
+
+2. 람다보다는 메서드 참조를 사용하라
+```java
+map.merge(key, 1, (count, incr) -> count + incr); //람다식을 활용한 방식
+map.merge(key, 1, Integer::sum); // 메서드 참조를 활용한 방식
+
+// 다만, 아래와 같이 람다가 간결하고 명확한 경우도 있다.
+service.execute(GoshThisClassNameIsHumongous::action);
+service.execute(() -> action());
+```
