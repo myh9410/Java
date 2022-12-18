@@ -215,3 +215,49 @@ map.merge(key, 1, Integer::sum); // 메서드 참조를 활용한 방식
 service.execute(GoshThisClassNameIsHumongous::action);
 service.execute(() -> action());
 ```
+3. 스트림을 적절히 활용하면 깔끔하고 명료해진다.
+```java
+public class Anagrams {
+    public static void main(String[] args) throws IOException {
+        Path dictionary = Paths.get(args[0]);
+        int minGroupSize = Integer.parseInt(args[1]);
+        //AS-IS
+        try (Stream<String> words = Files.lines(dictionary)) {
+            words.collect(
+                 groupingBy(words -> word.chars().sorted()
+                    .collect(StringBuilder::new,
+                            (sb, c) -> sb.append((char) c),
+                            StringBuilder::append).toString()))
+                    .values().stream()
+                    .filter(group->group.size() >= minGroupSize)
+                    .map(group -> group.size()+":"+group)
+                    .forEach(System.out::println);
+        }
+        //TO-BE
+        try (Stream<String> words = Files.lines(dictionary)){
+            words.collect(groupingBy(word -> alphabetize(word)))
+                    .values().stream()
+                    .filter(group -> group.size() >= minGroupSize)
+                    .forEach(g -> System.out.println(g.size()+":"+g));
+        }
+    }
+    
+    //AS-IS
+    private static List<Card> newDeck() {
+        List<Card> result = new ArrayList<>();
+        for(Suit suit :  Suit.values())
+            for (Rank rank : Rank.values())
+                result.add(new Card(suit, rank));
+        return result;
+    }
+    //TO-BE
+    private static List<Card> newDeck() {
+        return Stream.of(Suit.values())
+                .flatMap(suit -> 
+                    Stream.of(Rank.values())
+                         .map(rank -> new Card(suit, rank))
+                ).collect(toList());
+    }
+    
+}
+```
