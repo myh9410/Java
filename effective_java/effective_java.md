@@ -261,3 +261,17 @@ public class Anagrams {
     
 }
 ```
+### 8. 메서드
+1. 매개변수가 유효한지 검사하라
+```java
+public BigInteger mod(BigInteger m) {
+    //m이 null이면 원하는 Exception이 아닌 NullPointerException을 던진다.
+    if (m.signum() <= 0)
+        throw new ArithmeticException("계수(m)는 양수여야 합니다." + m);
+    ...
+}
+
+//자바의 null 검사 기능 사용
+this.strategy = Object.requireNonNull(strategy, "전략");
+assert a != null;
+```
