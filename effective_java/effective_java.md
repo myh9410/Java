@@ -275,3 +275,57 @@ public BigInteger mod(BigInteger m) {
 this.strategy = Object.requireNonNull(strategy, "전략");
 assert a != null;
 ```
+2. 메서드 시그니처를 신중히 설계하라
+- 메서드의 이름을 신중히 지어라
+- 편의 메서드를 너무 많이 만들지 마라
+- 매개변수 목록은 4개 이하로 유지하자. 같은 타입의 매개변수 여러개가 나오지 않도록 유의하자
+- 매개변수의 타입으로는 클래스보다 인터페이스가 낫다
+- boolean보다는 원소 2개짜리 열거타입이 낫다
+```java
+public enum TemperatureScale {FARENHEIT, CELSIUS}
+```
+3. 가변인수는 신중히 사용하라
+```java
+//AS-IS
+static int min (int... args) {
+    if (args.length == 0)
+        throw new IllegalArgumentException("인수가 1개 이상 필요합니다.");
+    int min = args[0];
+    for (int i=1; i<args.length; i++) {
+        if (args[i] < min) min = args[i];
+    }
+    return min;
+}
+
+//TO-BE
+static int min (int firstArg, int... remainingArgs) {
+    int min = firstArg;
+    for (int arg : remainingArgs)
+        if (arg < min)
+            min = arg;
+    return min;
+}
+```
+4. null이 아닌 빈 컬렉션이나 배열을 반환하라
+null을 반환하게 되면, null 상황을 처리하는 코드를 추가로 작성해야 한다.
+```java
+//AS-IS
+List<Cheese> cheeses = shop.getCheeses();
+if (cheeses != null && cheeses.contains(Cheese.STILTON)) {
+        ...
+}
+
+//TO-BE getcheeses()가 아래와 같다면.. 위처럼 null체크를 하지 않아도 된다.
+public List<Cheese> getCheeses() {
+    return cheesesInStock.isEmpty() ? Collections.emptyList() : new ArrayList<>(cheesesInStock);
+        }
+
+//배열을 사용하는 경우
+private static final Cheese[] EMPTY_CHEESE_ARRAY = new Cheese[0];
+
+public Cheese[] getCheeses() {
+    return cheesesInStock.toArray(EMPTY_CHEESE_ARRAY);
+    //아래 방법은 성능이 나빠질 수 있다. - 배열을 미리 할당하기 때문..
+    return cheesesInStock.toArray(new Cheese[cheesesInStock.size()]);
+}
+```
