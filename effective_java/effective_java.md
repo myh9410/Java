@@ -329,3 +329,27 @@ public Cheese[] getCheeses() {
     return cheesesInStock.toArray(new Cheese[cheesesInStock.size()]);
 }
 ```
+5. Optional 반환은 신중히 하라
+- 결과가 없을 수 있으며, 클라이언트에서 이 상황을 특별히 처리해야된다면 Optional<T>를 반환한다.
+- Optional을 반환하는 메서드에서는 절대 null을 반환하지 말자 (Optional 도입의 취지를 무시하는 행위다)
+```java
+public Optional<E> max(Collection<E> c) {
+    if (c.isEmpty()) return Optional.empty();
+        ...
+     return Optional.of(result);
+}
+```
+- Optional을 활용하여 기본값을 정해둘 수 있다.
+```java
+String lastWordInLexicon = doSomethingAndReturnOptional(word).orElse("default value");
+```
+- Optional을 활용하여 예외를 던질 수 있다.
+```java
+String something = doSomethingAndReturnOptional(word).orElseThrow(Exception::new);
+```
+- 항상 값이 채워져 있다고 가정한다.
+```java
+String something = doSomethingAndReturnOptional(word).get();
+```
+- 컬렉션, 스트림, 배열, 옵셔널 같은 컨테이너 타입은 Optional로 감싸면 안된다.
+### 9. 일반적인 프로그래밍 원칙
