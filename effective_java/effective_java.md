@@ -353,3 +353,16 @@ String something = doSomethingAndReturnOptional(word).get();
 ```
 - 컬렉션, 스트림, 배열, 옵셔널 같은 컨테이너 타입은 Optional로 감싸면 안된다.
 ### 9. 일반적인 프로그래밍 원칙
+1. 지역변수의 범위를 최소화하라
+- 가장 처음 쓰일 때 선언하기
+- 지역변수는 선언과 동시에 초기화해라
+- try-catch 내에서 사용하는 변수라면 try-catch 내에서 선언, 바깥에서 사용한다면 try블록 앞에서 선언
+- fori 관용구를 생각한다면, 변수 범위의 최소화를 생각해볼 수 있다.
+```java
+for(int i =0, n = expensiveComputation(); i<n; i++) {
+        ... //i로 무언가를 한다.
+        //i와 n의 범위가 일치한다
+}
+```
+- 메서드를 작게 유지하고, 한가지 기능에 집중한다.
+2. 전통적인 for문보다는 for-each문을 사용하라
