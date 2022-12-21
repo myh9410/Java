@@ -365,4 +365,33 @@ for(int i =0, n = expensiveComputation(); i<n; i++) {
 }
 ```
 - 메서드를 작게 유지하고, 한가지 기능에 집중한다.
-2. 전통적인 for문보다는 for-each문을 사용하라
+2. 정확한 답이 필요하다면 float과 double은 피하라 (특히 금융관련 계산 시)
+```java
+System.out.println(1.03 - 0.42) ; // 0.6100000000000001을 출력한다.
+System.out.println(1.00 - 9*0.10); // 0.09999999999999998을 출력한다.
+```
+정확한 답을 원한다면 BigDecimal, int 혹은 long을 사용해야 한다.  
+단, BigDecimal의 경우 단점이 있다. 따라서 가능한 int나 long을 사용하자
+- 기본 타입보다 사용이 불편하고, 속도가 느리다.
+
+3. 박싱된 기본타입보다는 기본 타입을 사용하라
+- 기본타입 예) int, double, boolean
+- 박싱된 기본타입 예) Integer, Double, Boolean
+
+기본타입과 박싱된 기본타입의 차이점
+  - 기본타입은 값을 갖고, 박싱된 기본타입은 값과 식별성을 갖는다.
+  - 기본타입은 언제나 유효한 값을갖고, 박싱된 기본타입은 유효하지 않은값(null)을 가질 수 있다.
+  - 기본타입은 박싱된 기본타입보다 시간, 메모리 사용면에서 더 효율적이다.
+박싱된 기본타입의 언박싱 과정에서 NullpointerException을 던질 수 있으므로 주의해야한다.
+
+4. 문자열 연결은 느리니 주의하라
+문자열 연결 연산자로 문자열 n개를 잇는 시간은 n^2에 비례한다.  
+String 대신 StringBuilder를 사용하면 성능이 크게 개선된다.
+
+5. 객체는 인터페이스를 사용해 참조하라
+```java
+Set<Son> sonSet = new LinkedHashSet<>(); //good
+LinkedHashSet<Son> sonSet = new LinkedHashSet<>(); //bad
+```
+적합한 인터페이스가 없다면 클래스로 참조해야 한다.  
+단, 가장 덜 구체적인 클래스를 타입으로 사용하자.
