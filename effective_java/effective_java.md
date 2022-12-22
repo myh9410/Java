@@ -395,3 +395,36 @@ LinkedHashSet<Son> sonSet = new LinkedHashSet<>(); //bad
 ```
 적합한 인터페이스가 없다면 클래스로 참조해야 한다.  
 단, 가장 덜 구체적인 클래스를 타입으로 사용하자.
+
+### 10. 예외
+1. 예외는 진짜 예외 상황에서만 사용하라
+```java
+//BAD
+try {
+    int i = 0;
+    while (true) {
+        range[i++].climb();
+    }
+} catch (ArrayIndexOutOfBoundsException e) {}
+
+//GOOD
+for (Mountain m : range) m.climb();
+```
+예외는 예외 상황에서만 사용하고, 일상적인 제어 흐름용으로 사용되어서는 안된다.
+또한, 잘 설계된 API라면 클라이언트가 정상적인 제어 흐름에서 예외를 사용할 일이 없게 해야 한다.
+
+2. 복구할 수 있는 상황에는 검사 예외를, 프로그래밍 오류에는 런타임 예외를 사용하라
+- 검사 예외는 호출자가 catch로 잡아 처리하거나, 전파하도록 강제한다.
+개발자가 구현하는 비검사 throwable은 RuntimeException의 하위 클래스여야 한다.
+
+3. 표준 예외를 사용하라
+- IllegalArgumentException - 호출자가 인수로 부적절한 값을 넘길 때 던진다.
+- IllegalStateException - 객체의 상태가 호출된 메서드를 수행하기에 적합하지 않을 때 던진다.
+- NullPointerException - null값을 허용하지 않는 메서드에 null을 던지는 경우 사용한다.
+- ConcurrentModificationException - 단일 쓰레드에서 사용하려고 설계한 객체를 여러 객체에서 사용하는 경우 던진다.
+- UnsupportedOperationException - 클라이언트가 요청한 동작을 대상 객체가 지원하지 않을 때 던진다.
+
+단, Exception, RuntimeException, Throwable, Error는 직접 재사용하지 말자.
+
+4. 추상화 수준에 맞는 예외를 던지라
+- 상위 계층에서는 저수준 예외를 잡아 자신의 추상화 수준에 맞는 예외로 바꿔 던져야 한다. (Exception Translation)
