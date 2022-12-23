@@ -428,3 +428,34 @@ for (Mountain m : range) m.climb();
 
 4. 추상화 수준에 맞는 예외를 던지라
 - 상위 계층에서는 저수준 예외를 잡아 자신의 추상화 수준에 맞는 예외로 바꿔 던져야 한다. (Exception Translation)
+
+5. 예외의 상세 메시지에 실패 관련 정보를 담으라
+- 발생한 예외에 관여된 모든 매개변수와 필드의 값을 실패 메시지에 담아야한다.
+- ex) IndexOutOfBoundsException의 경우, 최솟값, 최댓값, 그리고 범위를 벗어났다는 인덱스의 값을 담아야 한다.
+
+### 11. 동시성
+1. 공유 중인 가변 데이터는 동기화해 사용하라
+syncronized 키워드의 성질
+- 객체의 동시 접근이 불가능 하도록 한다. (일관성이 깨진 상태를 볼 수 없게 한다.)
+- 락의 보호하에 수행된 모든 이전 수정의 최종 결과를 보게 해준다.
+
+2. 스레드 안정성 수준을 문서화하라
+- 불변(immutable) : 외부 동기화가 필요 없는 경우, String, Long, Biginteger 등
+- 무조건적 스레드 안전 : 인스턴스가 수정될 수 있으나, 내부의 동기화 과정을 통해 외부에서 별도로 동기화처리를 하지 않아도 된다. AtomicLong, ConcurrentHashMap 등
+- 조건부 스레드 안전 : 거의 대부분이 스레드 안전하나, 일부 메서드는 동시에 사용하기 위해 외부 동기화가 필요하다. Collections.synchronized 등의 메서드는 외부 동기화가 필요하다.
+- 스레드 안전하지 않음 : 클래스의 인스턴스가 수정될 수 있음. 메서드 호출을 클라이언트가 선택한 외부 동기화 메커니즘으로 감싸야 한다. ArrayList, HashMap 등
+- 스레드 적대적 : 멀티스레드 환경에서 안전하지 않음. 일반적으로 사용하지 않거나 deprecated 처리
+
+3. 지연 초기화는 신중히 사용하라
+클래스, 인스턴스 생성 시의 초기화 비용은 줄지만, 초기화하는 필드에 접근하는 비용은 커진다.  
+대부분의 상황에서 일반적인 초기화가 지연 초기화보다 낫다.
+```java
+private final FieldType field = computeFieldValue();
+
+//syncronized를 사용하여 초기화 순환성을 유지하는 방법이 있다.
+private FieldType field;
+private synchronized FieldType getField() {
+    if (fiels == null) field = computeFieldValue();
+    return field;
+}
+```
